@@ -3,14 +3,14 @@ import LoginPage from "./pages/Login";
 import Home from "./pages/Home";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardLayout from "./layout/DashboardLayout";
-
+import BookPage from "./pages/BookPage";
 const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <DashboardLayout/>,
     children: [
       { path: "home", element: <Home /> },
-      { path: "book", element: <Home /> },
+      { path: "books", element: <BookPage /> },
     ],
    
      
