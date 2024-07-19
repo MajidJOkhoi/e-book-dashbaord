@@ -8,15 +8,10 @@ import {
   Package2,
   Search,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,6 +26,12 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 
 const DashboardLayout = () => {
+  const naviagte = useNavigate();
+  const handleLogout = () => {
+    naviagte("/auth/login");
+  }
+
+
   return (
     <div className="-grid -min-h-screen -w-full md:-grid-cols-[220px_1fr] lg:-grid-cols-[280px_1fr]">
       <div className="-hidden -border-r -bg-muted/40 md:-block">
@@ -68,22 +69,7 @@ const DashboardLayout = () => {
               </Link>
             </nav>
           </div>
-          <div className="-mt-auto -p-4">
-            <Card>
-              <CardHeader className="-p-2 -pt-0 md:-p-4">
-                <CardTitle>Upgrade to Pro</CardTitle>
-                <CardDescription>
-                  Unlock all features and get unlimited access to our support
-                  team.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="-p-2 -pt-0 md:-p-4 md:-pt-0">
-                <Button size="sm" className="-w-full">
-                  Upgrade
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
+       
         </div>
       </div>
       <div className="-flex -flex-col">
@@ -123,22 +109,7 @@ const DashboardLayout = () => {
                   Books
                 </Link>
               </nav>
-              <div className="-mt-auto">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Upgrade to Pro</CardTitle>
-                    <CardDescription>
-                      Unlock all features and get unlimited access to our
-                      support team.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Button size="sm" className="-w-full">
-                      Upgrade
-                    </Button>
-                  </CardContent>
-                </Card>
-              </div>
+          
             </SheetContent>
           </Sheet>
           <div className="-w-full -flex-1">
@@ -147,7 +118,7 @@ const DashboardLayout = () => {
                 <Search className="-absolute -left-2.5 -top-2.5 -h-4 -w-4 -text-muted-foreground" />
                 <Input
                   type="search"
-                  placeholder="Search products..."
+                  placeholder="Search books .... "
                   className="-w-full -appearance-none -bg-background -pl-8 -shadow-none md:-w-2/3 lg:-w-1/3"
                 />
               </div>
@@ -166,7 +137,7 @@ const DashboardLayout = () => {
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>

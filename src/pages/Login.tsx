@@ -14,23 +14,26 @@ import { useRef } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { login } from "@/http/api";
 import { LoaderCircle } from "lucide-react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import useTokenStore from "@/store";
 
 const LoginPage = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
+  const setToken = useTokenStore((state) => state.setToken);
+
   const mutation = useMutation({
     mutationFn: login,
-    onSuccess: (data) => {
-      alert("Login successful!");
+    onSuccess: (response) => {
+      toast.success("Login successful!");
       navigate("/dashboard/home");
-      console.log("data", data);
-      // Redirect to a different page or update the UI as needed
+      setToken(response.data.accessToken);
     },
     onError: (error) => {
-      alert("Login failed. Please check your credentials.");
-      console.log(error);
+      toast.error(error.message);
     },
   });
 
@@ -40,7 +43,7 @@ const LoginPage = () => {
 
     // Validate email and password
     if (!email || !password) {
-      alert("Please enter a valid email and password.");
+      toast.warning(" email and password required");
       return;
     }
 
