@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Navigate, Outlet } from "react-router-dom";
 import {
   Bell,
   CircleUser,
@@ -8,7 +8,7 @@ import {
   Package2,
   Search,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+
 
 import { Button } from "@/components/ui/button";
 
@@ -22,15 +22,20 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-
+import useTokenStore from "@/store";
 
 
 const DashboardLayout = () => {
-  const naviagte = useNavigate();
-  const handleLogout = () => {
-    naviagte("/auth/login");
-  }
 
+  const token = useTokenStore((state) => state.token);
+
+  if (!token) {
+    return <Navigate to="/auth/login" replace />;
+  }
+ 
+  const handleLogout = () => {
+    <Navigate to="/auth/login" replace />;
+  };
 
   return (
     <div className="-grid -min-h-screen -w-full md:-grid-cols-[220px_1fr] lg:-grid-cols-[280px_1fr]">
@@ -69,7 +74,6 @@ const DashboardLayout = () => {
               </Link>
             </nav>
           </div>
-       
         </div>
       </div>
       <div className="-flex -flex-col">
@@ -109,7 +113,6 @@ const DashboardLayout = () => {
                   Books
                 </Link>
               </nav>
-          
             </SheetContent>
           </Sheet>
           <div className="-w-full -flex-1">
@@ -142,9 +145,7 @@ const DashboardLayout = () => {
           </DropdownMenu>
         </header>
         <main className="-flex -flex-1 -flex-col -gap-4 -p-4 lg:-gap-6 lg:-p-6">
-      
-        <Outlet />
-
+          <Outlet />
         </main>
       </div>
     </div>
