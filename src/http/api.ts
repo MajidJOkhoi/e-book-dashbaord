@@ -8,6 +8,7 @@ const api = axios.create({
   },
 });
 
+
 export const login = async (data: { email: string; password: string }) =>
   await api.post("/api/users/login", data);
 
@@ -16,3 +17,7 @@ export const register = async (data: {
   email: string;
   password: string;
 }) => await api.post("/api/users/register", data);
+
+export const getBooks = async () => {
+  return await api.get("/api/book/books");
+};
