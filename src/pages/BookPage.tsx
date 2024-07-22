@@ -1,6 +1,7 @@
 import { getBooks } from "@/http/api";
 import { useQuery } from "@tanstack/react-query";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
 
 import {
   Breadcrumb,
@@ -35,8 +36,15 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Book } from "@/types";
+import { useNavigate } from "react-router-dom";
 
 const BookPage = () => {
+  const navigate = useNavigate();
+
+  const NavigateBookPage = () => {
+    navigate(`/dashboard/books/create`);
+  };
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ["books"],
     queryFn: getBooks,
@@ -61,27 +69,25 @@ const BookPage = () => {
 
   return (
     <>
-     <div className="-flex  -items-center -justify-between">
-     <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/dashboard/home">Home</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/docs/components">Books</BreadcrumbLink>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-      <Button>
-      <PlusCircle size={20}/>
-      <span className="-ml-2"> Add Book </span>
-     </Button>
-     </div>
+      <div className="-flex -items-center -justify-between">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/dashboard/home">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/docs/components">Books</BreadcrumbLink>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+        <Button onClick={NavigateBookPage}>
+          <PlusCircle size={20} />
+          <span className="-ml-2 "> Add Book </span>
+        </Button>
+      </div>
 
-   
-
-      <Card className="-mt-2">
+      <Card className="-mt-2 -w-full -max-w-sm sm:-max-w-full">
         <CardHeader>
           <CardTitle>Books</CardTitle>
           <CardDescription>
@@ -92,20 +98,15 @@ const BookPage = () => {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="hidden -w-[100px] -sm:table-cell">
-                  <span className="sr-only">Image</span>
+                <TableHead className="-w-[200px] sm:-table-cell">
+                  <span className="-sr-only">Image</span>
                 </TableHead>
                 <TableHead>Title</TableHead>
                 <TableHead>Genre</TableHead>
-
-                <TableHead className="hidden -md:table-cell">
-                  Author Name
-                </TableHead>
-                <TableHead className="hidden -md:table-cell">
-                  Created at
-                </TableHead>
+                <TableHead className="-hidden md:-table-cell">Author Name</TableHead>
+                <TableHead className="-hidden md:-table-cell">Created at</TableHead>
                 <TableHead>
-                  <span className="sr-only">Actions</span>
+                  <span className="-sr-only">Actions</span>
                 </TableHead>
               </TableRow>
             </TableHeader>
@@ -113,10 +114,10 @@ const BookPage = () => {
               {data?.data.map((book: Book) => {
                 return (
                   <TableRow key={book._id}>
-                    <TableCell className="hidden -sm:table-cell">
+                    <TableCell className="sm:-table-cell">
                       <img
                         alt={book.title}
-                        className="-aspect-square -rounded-md -object-cover"
+                        className="-aspect-square -rounded-md -object-cover "
                         height="60"
                         src={book.coverImage}
                         width="50"
@@ -126,14 +127,12 @@ const BookPage = () => {
                     <TableCell>
                       <Badge variant={"outline"}> {book.genre} </Badge>
                     </TableCell>
-
-                    <TableCell className="hidden -md:table-cell">
+                    <TableCell className="-hidden md:-table-cell">
                       {book.author.name}
                     </TableCell>
-                    <TableCell className="hidden -md:table-cell">
+                    <TableCell className="-hidden md:-table-cell">
                       {new Date(book.createdAt).toLocaleDateString()}
                     </TableCell>
-
                     <TableCell>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
@@ -147,8 +146,12 @@ const BookPage = () => {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                          <DropdownMenuItem>Edit</DropdownMenuItem>
-                          <DropdownMenuItem>Delete</DropdownMenuItem>
+                          <Link to={`/dashboard/books/edit/${book._id}`}>
+                            <DropdownMenuItem>Edit</DropdownMenuItem>
+                          </Link>
+                          <Link to={`/dashboard/books/delete/${book._id}`}>
+                            <DropdownMenuItem>Delete</DropdownMenuItem>
+                          </Link>
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </TableCell>
