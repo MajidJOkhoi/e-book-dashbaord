@@ -38,11 +38,11 @@ import {
 import { Book } from "@/types";
 import { useNavigate } from "react-router-dom";
 
-const BookPage = () => {
+const ManageProject = () => {
   const navigate = useNavigate();
 
-  const NavigateBookPage = () => {
-    navigate(`/dashboard/books/create`);
+  const NavigateProjectPage = () => {
+    navigate(`/dashboard/projects/create`);
   };
 
   const { data, isLoading, isError } = useQuery({
@@ -62,7 +62,7 @@ const BookPage = () => {
   if (isError) {
     return (
       <div className="-flex -items-center -justify-center -min-h-screen">
-        <p className="-text-red-500">An error occurred while fetching books.</p>
+        <p className="-text-red-500">An error occurred while fetching Projects.</p>
       </div>
     );
   }
@@ -77,21 +77,21 @@ const BookPage = () => {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink href="/docs/components">Books</BreadcrumbLink>
+              <BreadcrumbLink href="#">Projects</BreadcrumbLink>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <Button onClick={NavigateBookPage}>
+        <Button onClick={NavigateProjectPage}>
           <PlusCircle size={20} />
-          <span className="-ml-2 "> Add Book </span>
+          <span className="-ml-2 "> Add Project </span>
         </Button>
       </div>
 
       <Card className="-mt-2 -w-full -max-w-sm sm:-max-w-full">
         <CardHeader>
-          <CardTitle>Books</CardTitle>
+          <CardTitle>All Projects </CardTitle>
           <CardDescription>
-            Manage your Books and view their sales performance.
+            Manage your Projects and view their Team performance.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -166,4 +166,4 @@ const BookPage = () => {
   );
 };
 
-export default BookPage;
+export default ManageProject;

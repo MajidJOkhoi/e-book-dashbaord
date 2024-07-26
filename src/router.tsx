@@ -8,6 +8,9 @@ import AuthLayout from "./layout/AuthLayout";
 import CreateBookPage from "./pages/CreateBookPage";
 import EditBook from "./pages/EditBook";
 import DeleteBook from "./pages/DeleteBook";
+import ManageProject from "./pages/manageproject/ManageProject";
+import CreateProject from "./pages/manageproject/CreateProject";
+import CheckPerformance from "./pages/CheckPerformance";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +22,13 @@ const router = createBrowserRouter([
       { path: "books/create", element: <CreateBookPage /> },
       { path: "books/edit/:id", element: <EditBook /> },
       { path: "books/delete/:id", element: <DeleteBook /> },  
+
+
+      // Manage Project Routes 
+
+      {path: "projects" , element: <ManageProject/>},
+      {path:"projects/create", element: <CreateProject />},
+      {path:"performance", element: <CheckPerformance  />}
     ],
   },
   {
