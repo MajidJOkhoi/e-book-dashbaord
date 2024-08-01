@@ -138,7 +138,7 @@ const CreateProject = () => {
                             </BreadcrumbList>
                         </Breadcrumb>
                         <div className="-flex -items-center -gap-4">
-                            <Link to="/dashboard/books">
+                            <Link to="/dashboard/projects">
                                 <Button variant={'outline'}>
                                     <span className="-ml-2">Cancel</span>
                                 </Button>

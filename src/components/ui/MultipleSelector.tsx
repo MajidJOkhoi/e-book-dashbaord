@@ -291,7 +291,7 @@ const MultipleSelector = React.forwardRef<MultipleSelectorRef, MultipleSelectorP
                 key={option.value}
                 variant="secondary"
                 className={cn(
-                  '-group -pointer-events-auto -flex -h-6 -items-center -gap-1 -border -border-dashed -bg-muted -py-0 -pl-2 -pr-1.5 -text-muted-foreground',
+                  '-group -pointer-events-auto -flex -h-6 -items-center -gap-1  -border-dashed -bg-muted -py-0 -pl-2 -pr-1.5 -text-muted-foreground',
                   option.fixed && '-border-transparent -pr-2',
                   badgeClassName,
                 )}

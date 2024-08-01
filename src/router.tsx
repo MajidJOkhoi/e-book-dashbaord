@@ -10,7 +10,11 @@ import EditBook from "./pages/EditBook";
 import DeleteBook from "./pages/DeleteBook";
 import ManageProject from "./pages/manageproject/ManageProject";
 import CreateProject from "./pages/manageproject/CreateProject";
+import AddUser from "./pages/manageuser/AddUser";
+import ManageLeave from "./pages/manageleave/ManageLeave";
 import CheckPerformance from "./pages/CheckPerformance";
+import ManageTeam from "./pages/manageuser/ManageTeam";
+import ManageAttendece from "./pages/manageattendece/ManageAttendence";
 
 const router = createBrowserRouter([
   {
@@ -21,28 +25,28 @@ const router = createBrowserRouter([
       { path: "books", element: <BookPage /> },
       { path: "books/create", element: <CreateBookPage /> },
       { path: "books/edit/:id", element: <EditBook /> },
-      { path: "books/delete/:id", element: <DeleteBook /> },  
+      { path: "books/delete/:id", element: <DeleteBook /> },
 
+      // Manage Project Routes
+      { path: "projects", element: <ManageProject /> },
+      { path: "projects/create", element: <CreateProject /> },
 
-      // Manage Project Routes 
+      // Manage Team Routes
+      { path: "team", element: <ManageTeam /> },
+      { path: "team/create", element: <AddUser /> },
 
-      {path: "projects" , element: <ManageProject/>},
-      {path:"projects/create", element: <CreateProject />},
-      {path:"performance", element: <CheckPerformance  />}
+      // Manage Leave, Performance, and Attendance Routes
+      { path: "leaves", element: <ManageLeave /> },
+      { path: "performance", element: <CheckPerformance /> },
+      { path: "attendence", element: <ManageAttendece/> },
     ],
   },
   {
     path: "/auth",
     element: <AuthLayout />,
     children: [
-      {
-        path: "login",
-        element: <LoginPage />,
-      },
-      {
-        path: "register",
-        element: <RegisterPage />,
-      },
+      { path: "login", element: <LoginPage /> },
+      { path: "register", element: <RegisterPage /> },
     ],
   },
 ]);
